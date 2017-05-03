@@ -52,7 +52,12 @@ deploy services: `make create`
   * this calls kubectl to deploy svc1 to match the  service and pod configurations in the k8s_cfg subdir. 
   * note that this runs the following commands:
   
-  
+  ```
+  @eval $$(minikube docker-env) ;\   <= this command makes sure container images reside in the image cache on the minikube vm
+  docker image build -t $(REPO):latest -f Dockerfile . ;\ <= this command builds the image with the latest timestamp
+  kubectl create -f k8s_cfg/  <= this command deploys service and pod
+  ```
+
 confirm that service and pod were created:
 
   * `kubectl get po` - you should see output like this:
