@@ -1,0 +1,9 @@
+pytest
+pytest_mock
+flask==0.12
+flask_restful==0.3.5
+python-dateutil==2.6.0
+pyyaml==3.12
+coverage
+webargs
+requests
