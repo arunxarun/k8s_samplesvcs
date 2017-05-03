@@ -9,7 +9,7 @@ create:
 	kubectl create -f k8s_cfg/
 
 run_local:
-	export SVC2_SERVICE_HOST=$(shell minikube ip); \ 
+	export SVC2_SERVICE_HOST=$(shell minikube ip); \
 	export SVC2_SERVICE_PORT=$(shell kubectl get service svc2  -o json | jq '.spec.ports[0].nodePort'); \
   cd src; \
 	python server.py
