@@ -5,7 +5,7 @@ TIMESTAMP=tmp-$(shell date +%s )
 
 create:
 	@eval $$(minikube docker-env) ;\
-  docker image build -t $(REPO):latest -f Dockerfile . ;\
+  docker image build -t $(REPO):fortest	 -f Dockerfile . ;\
 	kubectl create -f k8s_cfg/
 
 run_local:

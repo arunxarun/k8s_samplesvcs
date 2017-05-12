@@ -24,8 +24,8 @@ spec:
     spec:
       containers:
       - name: svc1
-        image: arunxarun/svc1:latest
-        imagePullPolicy: Never
+        image: arunxarun/svc1:fortest
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
             cpu: 100m
