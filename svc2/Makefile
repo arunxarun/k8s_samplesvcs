@@ -12,6 +12,10 @@ run_local:
 	cd src; \
 	python server.py
 
+run_tests:
+	  pytest test/*
+
+
 push_image:
 	@eval $$(minikube docker-env) ;\
 	docker image build -t $(REPO):$(TIMESTAMP) -f Dockerfile . ;\
