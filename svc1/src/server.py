@@ -33,7 +33,6 @@ class Svc2:
     """
 
     def get(self,value):
-
         logging.debug("sending requests to %s with value %s"%(SVC2,value))
         r = requests.get(SVC2, params={'value':value})
         return r.json()
@@ -41,17 +40,15 @@ class Svc2:
 
 
 class Svc1:
-    """ primary resource in this service,
+    """ simple caller class. Broken out from Res for testability
     """
     def __init__(self, svc2):
         self.svc2 = svc2
 
-
-
     def get(self, value):
         """ calls svc2 and returns svc2 json
         """
-        logging.debug("in resource get!")
+        logging.debug("in svc1 get!")
 
         resp = self.svc2.get('value1');
         #resp = {'response': 200 }
@@ -60,16 +57,21 @@ class Svc1:
 
 
 class Res(Resource):
+    """ REST resource (GET is the only enabled verb)
+    """
     def __init__(self) :
-        self.svc2 = Svc2()
-        self.svc1 = Svc1(self.svc2)
+        self.svc1 = Svc1(Svc2())
 
+    """ structure is used to map variables in the GET call below
+    """
     publish_args = {
         'value': fields.String(required=True)
     }
 
     @use_kwargs(publish_args)
     def get(self, value):
+        """ delegate to svc1
+        """
         return self.svc1.get(value)
 
 
