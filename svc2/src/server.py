@@ -14,8 +14,19 @@ api = Api(app)
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
+class Svc2:
+    ''' broken out for testability
+    '''
+    def get(self, value):
+
+        logging.debug("Svc2.get() called with %s"%value)
+        logging.debug("returning response now...")
+        return {'response': {'service':'Svc2', 'value': value}}
 
 class Res(Resource):
+
+    def __init__(self):
+        self.svc2 = Svc2()
 
     publish_args = {
         'value': fields.String(required=True)
@@ -23,9 +34,7 @@ class Res(Resource):
 
     @use_kwargs(publish_args)
     def get(self, value):
-        logging.debug("SVC2.get() called with %s"%value)
-        logging.debug("returning response now...")
-        return {'response': {'service':'SVC2', 'value': value}}
+        return svc2.get(value)
 
 
 api.add_resource(Res, '/resource')

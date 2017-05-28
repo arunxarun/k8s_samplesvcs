@@ -15,4 +15,4 @@ def testValidResponseFromSvc2():
 
     results = svc2.get('256')
 
-    assert(results['response'] == {'service':'SVC2', 'value':'256'})
+    assert(results['response'] == {'service':'Svc2', 'value':'256'})
