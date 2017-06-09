@@ -6,7 +6,9 @@ TIMESTAMP=tmp-$(shell date +%s )
 create:
 	@eval $$(minikube docker-env) ;\
 	docker image build -t $(REPO):fortest -f Dockerfile . ;\
-	kubectl create -f k8s_cfg/
+	kubectl create -f k8s_cfg/svc1_service.yaml ;\
+	kubectl create -f k8s_cfg/svc1_deployment.yaml ;\
+
 
 set_env:
 	export SVC2_SERVICE_HOST=$(shell minikube ip); \
@@ -14,7 +16,8 @@ set_env:
 
 run:
 	@eval $$(minikube docker-env) ;\
-	kubectl create -f k8s_cfg/
+	kubectl create -f k8s_cfg/svc1_service.yaml ;\
+	kubectl create -f k8s_cfg/svc1_deployment.yaml ;\
 
 run_local:
 	export SVC2_SERVICE_HOST=$(shell minikube ip); \
@@ -37,6 +40,6 @@ get_sampleurl:
 
 echo_sampleurl:
 		echo curl http://$(shell minikube ip):$(shell kubectl get service svc1  -o json | jq '.spec.ports[0].nodePort')/resource?value=2;
-		
+
 delete:
 	kubectl delete -f k8s_cfg/

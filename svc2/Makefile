@@ -6,11 +6,15 @@ TIMESTAMP=tmp-$(shell date +%s )
 create:
 	@eval $$(minikube docker-env) ;\
   docker image build -t $(REPO):fortest	 -f Dockerfile . ;\
-	kubectl create -f k8s_cfg/
+	kubectl create -f k8s_cfg/svc2_service.yaml ;\
+	kubectl create -f k8s_cfg/svc2_deployment.yaml ;\
+
 
 run:
 	@eval $$(minikube docker-env) ;\
-	kubectl create -f k8s_cfg/
+	kubectl create -f k8s_cfg/svc2_service.yaml ;\
+	kubectl create -f k8s_cfg/svc2_deployment.yaml ;\
+
 
 run_local:
 	cd src; \
