@@ -12,7 +12,7 @@ spec:
   #externalIPs:
   #  - 192.168.99.100
   ports:
-    - port: 80 # service accepts connections here.
+    - port: 80 # service accepts connections here. Note that this is a cluster internal port.
       targetPort: 8080 # the container listens here
   selector:
     app: svc1
