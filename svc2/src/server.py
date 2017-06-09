@@ -34,8 +34,9 @@ class Res(Resource):
 
     @use_kwargs(publish_args)
     def get(self, value):
-        return svc2.get(value)
-
+        return self.svc2.get(value)
+        # uncomment below line to crash
+        #return svc2.get(value)
 
 api.add_resource(Res, '/resource')
 
