@@ -53,7 +53,7 @@ class Svc1:
         resp = self.svc2.get('value1');
         #resp = {'response': 200 }
         logging.debug(resp)
-        return {'service': 'SVC1', 'calling': SVC2, 'response': resp['response'],'value': value}
+        return {'service': 'svc1', 'calling': SVC2, 'response': resp['response'],'value': value}
 
 
 class Res(Resource):
